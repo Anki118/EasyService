@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3" style="margin-top:20px">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#" (click)="getAllItems()">All Items</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" (click)="setItems('Cereals')">Cereals</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" (click)="setItems('Dairy')">Dairy</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" (click)="setItems('Fruits')">Fruits</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" (click)="setItems('Spices')">Spices</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#" (click)="setItems('Vegetables')">Vegetables</a>
+                      </div>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                    <!-- <app-menue [itemType]="items"></app-menue> -->
+                    <div class="card-columns" style="margin:20px">
+                        <div *ngFor="let obj of items " class="card" style="width: 220px;">
+                                <img class="card-img-top" src="{{'/assets/'+obj.name+'.jpg'}}" alt="Card image">
+                                <div class="card-body">
+                                  <h4 class="card-title">{{obj.name}}</h4>
+                                  <p class="card-text">Price : {{obj.price |currency: 'INR'}}</p>
+                                  <div>
+                                    <button type="button" class="btn btn-danger" style="width: 100%" id="{{obj.name}}" (click)="addToCart(obj.name,obj.price)">ADD TO CART</button>
+                                    <span id="{{obj.name+'Id'}}" style="display: none">
+                                      <span class="minus" id="{{obj.name+'Minus'}}" (click)="removeFromCart(obj.name,obj.price)">-</span>
+                                      <input type="text" id="{{obj.name+'Count'}}" value="1"/>
+                                      <span class="plus" id="{{obj.name+'Plus'}}" (click)="addMoreToCart(obj.name,obj.price)">+</span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                </div>
+                </div>
+    </div>
+    
+</div>

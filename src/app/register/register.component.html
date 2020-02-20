@@ -1,0 +1,34 @@
+<div class = "container-fluid">
+  <div class="row">
+    <div class="col-sm-4"></div> 
+    <div class="col-sm-4" style="margin-top: 5%">
+      <div class="card" >
+       <img class="card-img-top" src="assets/signup.jpg" alt="Card image" style="height: 200px;"> 
+        <div class="card-body"> 
+            <div *ngIf="errFlag" class="alert alert-danger">
+                {{errorMessage}}
+              </div>
+              <div *ngIf="successFlag" class="alert alert-success">
+                  {{successMessage}}
+                </div>
+            <form [formGroup] = "RegisterForm">
+                <div class="form-group">
+                  <label>Email </label>
+                 
+                  <input  type="text" class="form-control" formControlName="email">
+                 
+                </div>
+                <div class="form-group">
+                  <label>Password </label>
+                  <input type="password" class="form-control" formControlName="password">
+                </div>
+                <button type="submit"  class="btn btn-success" style="width: 100%" [disabled]="RegisterForm.invalid" (click)="tryRegister(RegisterForm.value)">Register</button>
+              </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-sm-4"></div>
+  </div> 
+</div>
+

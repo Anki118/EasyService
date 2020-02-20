@@ -1,0 +1,37 @@
+
+<div class="container" style="margin: 20px">
+  <div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+      <h2>Edit Menue</h2>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4" style="text-align: right"> <button type="submit" class="btn btn-danger"  (click)="logOut()">Logout</button></div>
+  </div>
+    <hr>
+    <p>Type something in the input field to search the menue</p> 
+    <div class="alert alert-success" *ngIf="showSuccess">
+      Data Saved SuccessFully!
+    </div> 
+    <input class="form-control" id="myInput" type="text" [(ngModel)]="filtercriteria" (keyup)="applyFilter()" placeholder="Search..">
+    <br>
+    <table class="table table-striped" width="60%">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody id="myTable" >
+        <tr *ngFor="let obj of items">
+          <td><img src="{{'/assets/'+obj.name+'.jpg'}}" alt="Card image" class="rounded-circle" width="40" height="25"></td>
+          <td>{{obj.name}}</td>
+          <td><span id="{{obj.name+'hprice'}}">{{obj.price}}</span><input  [id]="obj.name" type="number" [(ngModel)]="obj.price" style="border: none;display: none"></td>
+          <td><i id="{{obj.name+'Edit'}}" class='fas fa-edit' style='font-size:24px;' placement="top" ngbTooltip="Change Price" (click)="editItem(obj.name)"></i>
+            <i id="{{obj.name+'Save'}}" class='fas fa-save' style='font-size:24px;display: none;' placement="top" ngbTooltip="Save Price" (click)="saveItem(obj.name,obj.price)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

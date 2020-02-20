@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3" style="margin-top: 20px">
+                <form #customerForm="ngForm">
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <input type="text" #name required class="form-control" name="cname" [(ngModel)]="customerObj.name" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" #mobNo="ngModel" required class="form-control" name="mobNo" [(ngModel)]="customerObj.mobNo" pattern="^\d{10}$" [class.is-invalid]="mobNo.invalid && mobNo.touched" ngModel>
+                        <small class="text-danger" [class.d-none]="mobNo.valid">Phone number must be 10 digit</small>
+                      </div>
+                      <button type="button" class="btn btn-danger ml-3" (click)="genInvoice()">Generate Invoice</button>
+                      <button type="button" *ngIf="showInvoice"  class="btn btn-danger ml-3" (click)="gotoMenue()" style="margin-top: 10px">Go to menue</button>
+                </form>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9" style="margin-top: 20px">
+          <div class="card" *ngIf="showInvoice">
+            <div class="card-header">
+              #Invoice
+            </div>
+            <div class="card-body" >
+              <h5 class="card-title">{{customerObj.name}}</h5>
+              <h6>+91-{{customerObj.mobNo}}</h6>
+            <hr>
+               <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th width="10%">Item</th>
+                  <th width="8%">Quantity</th>
+                  <th width="12%">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of cartItems">
+                  <td>{{item.cartItem}}</td>
+                  <td>1 &#10005;{{item.quantity}}</td>
+                  <td>{{item.totprice}}</td>
+                </tr>
+              </tbody>
+            </table>
+             <hr>
+             <p><span><b>Total Price :{{TotalPriceDisplay  | currency: 'INR'}}</b></span></p>
+             <p style="text-align:center">***10% Discount***</p>
+             <p style="text-align:center">***You saved {{dicountAmount | currency: 'INR'}} on total amount****</p>
+            </div>
+          </div>
+              <div *ngIf="!isDataPresent">
+                <h3>Your cart is empty</h3>
+                <h5><a routerLink="/user">Add items</a></h5>
+            </div>
+        </div>
+    </div>
+</div>

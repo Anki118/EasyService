@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container" style="margin:20px">
+  <h1>Shopping Cart</h1>
+  <table class="table table-striped" width="80%" *ngIf="isDataPresent">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let CartItem of cartItems">
+        <td><img src="{{'/assets/'+CartItem.cartItem+'.jpg'}}" alt="Card image" class="rounded-circle" width="70" height="55"></td>
+        <td> {{CartItem.cartItem}}</td>
+        <td>
+            <span id="{{CartItem.cartItem+'Id'}}">
+                <span class="minus" id="{{CartItem.cartItem+'Minus'}}" (click)="removeFromCart(CartItem.cartItem)">-</span>
+                <input type="text" id="{{CartItem.cartItem+'Count'}}" value="{{CartItem.quantity+' in cart'}}"/>
+                <span class="plus" id="{{CartItem.cartItem+'Plus'}}" (click)="addMoreToCart(CartItem.cartItem)">+</span>
+              </span>
+         </td>
+        <td>{{CartItem.totprice |currency: 'INR'}}</td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-danger" (click)="getInvoice()">Check Out</button></td>
+        <td></td>
+        <td></td>
+        <td >{{finalPrice |currency: 'INR'}}</td>
+      </tr>
+  </table>
+  <div *ngIf="!isDataPresent">
+      <h3>Your cart is empty</h3>
+      <h5><a routerLink="/user">Add items</a></h5>
+  </div>
+</div>
