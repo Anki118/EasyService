@@ -99,7 +99,7 @@ export class UserComponent implements OnInit {
         var id:any=obj+'Count';
         var quantityObj=document.getElementById(id);
         quantityObj.setAttribute('value',alreadyAddedItemqty.toString());
-        this.addMoreToCart(obj,price)
+        this.addMoreToCart(obj,price);
       }
       else if(this.fetchData.cartItems.length!=0){
           var cartObj=new UserCart();
